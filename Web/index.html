@@ -469,6 +469,10 @@
             border-radius: 8px;
         }
 
+        .summary-item.hide-mobile {
+            display: none;
+        }
+
         .summary-item .value {
             font-size: 1.25rem;
             font-weight: 700;
@@ -670,6 +674,10 @@
 
             .summary-bar {
                 grid-template-columns: repeat(5, 1fr);
+            }
+
+            .summary-item.hide-mobile {
+                display: block;
             }
 
             .pattern-columns {
@@ -1114,14 +1122,6 @@
                 <div class="summary-item">
                     <div class="value">${product.stitches}</div>
                     <div class="label">Stitches</div>
-                </div>
-                <div class="summary-item" style="display: none;">
-                    <div class="value">${segments.length}</div>
-                    <div class="label">Segments</div>
-                </div>
-                <div class="summary-item" style="display: none;">
-                    <div class="value">~${Math.ceil(totalBalls)}</div>
-                    <div class="label">Balls</div>
                 </div>
             `;
 
