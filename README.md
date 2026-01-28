@@ -1,95 +1,107 @@
-# Palette Cinematografiche in Tessuto
+# Knit the Film
 
-Crea sciarpe, coperte, pad mouse e altri oggetti tessili che rappresentano visivamente i colori di un film.
+Transform film color palettes into knitting and crochet patterns.
 
----
-
-## L'idea
-
-Ogni film ha una "firma cromatica" - i colori dominanti che appaiono nel corso della pellicola. The Matrix è verde, Blade Runner è ciano/arancio, Grand Budapest Hotel è rosa/rosso.
-
-Le immagini nella cartella `Movies/` mostrano questa firma: ogni riga orizzontale è un fotogramma del film, compresso in una striscia di colore. Dall'alto al basso = dall'inizio alla fine del film.
-
-**Questo progetto trasforma quelle strisce in istruzioni per lavori tessili**: maglia, uncinetto, tessitura. Il risultato è un oggetto che "racconta" visivamente il film attraverso i suoi colori.
+**Live Demo:** https://jackscampi-backup.github.io/knit-the-film/
 
 ---
 
-## Pattern pronti (100 film)
+## What is this?
 
-Nella cartella `Pattern/` ci sono già 100 pattern pronti dei film più iconici:
+Every film has a unique "color signature" - the dominant colors that appear throughout the movie. This project transforms those colors into practical patterns for textile crafts: knitting, crochet, and weaving.
 
-- **Classici**: Godfather, 2001, Blade Runner, Shining, Taxi Driver, Apocalypse Now
-- **Anni 90**: Pulp Fiction, Matrix, Fight Club, Fargo, Shawshank Redemption
-- **Moderni**: Interstellar, Mad Max, La La Land, Joker, Arrival
-- **Animazione**: Lion King, Spirited Away, Totoro, Wall-E, Finding Nemo
-- **Wes Anderson**: Grand Budapest Hotel, Moonrise Kingdom, Royal Tenenbaums
-
-Ogni pattern contiene:
-- Lista colori **in ordine** (dall'inizio alla fine del film)
-- Codici **HEX** (per comprare il filato giusto)
-- **Proporzioni %** (quanto spazio occupa ogni colore)
+The result? Scarves, blankets, cushions, and other textile creations that visually "tell" a film through its colors.
 
 ---
 
-## Come usare un pattern
+## Features
 
-Apri un file `.md` dalla cartella `Pattern/`, ad esempio `the-matrix-1999.md`:
-
-```
-| # | Colore | HEX | % |
-|:-:|--------|:---:|:-:|
-| 1 | Verde Scuro | #1f2f15 | 10.5% |
-| 2 | Verde | #7ab473 | 5.8% |
-| 3 | Verde Scuro | #21310d | 11.0% |
-...
-```
-
-Le percentuali indicano la proporzione di ogni colore. Tu decidi le dimensioni totali:
-
-| Progetto | Righe totali | Colore al 10% = |
-|----------|--------------|-----------------|
-| Pad mouse | 50 righe | 5 righe |
-| Sciarpa | 150 righe | 15 righe |
-| Coperta | 400 righe | 40 righe |
-
-**Esempio**: vuoi fare una sciarpa di Matrix lunga 150 righe.
-- Colore 1 (Verde Scuro, 10.5%) → 16 righe
-- Colore 2 (Verde, 5.8%) → 9 righe
-- Colore 3 (Verde Scuro, 11%) → 17 righe
-- ...e così via
+- **257 film palettes** from [The Colors of Motion](https://thecolorsofmotion.com/)
+- **Web interface** with product selector (Scarf, Blanket, Mousepad, Cushion, Custom)
+- **Automatic calculations** for rows, stitches, and yarn needed
+- **Yarn ball estimates** (different for knitting vs crochet)
+- **Pattern instructions** with segment-by-segment guidance
+- **Custom dimensions** support
 
 ---
 
-## Generare nuovi pattern
+## How it works
 
-Se vuoi un film non incluso nei 100, puoi generarlo:
-
-```bash
-cd /Users/ct011099/Documents/AI_Terminal/TOOLKIT/Palette/Script
-source ../../.venv/bin/activate
-
-python genera_pattern.py ../Movies/nome-film.png
-python genera_pattern.py ../Movies/nome-film.png --colori 10  # meno colori
-```
+1. Each film palette image (1000×1600 px) represents the entire movie
+2. Each horizontal row = one frame, compressed to its average color
+3. Top to bottom = start to end of the film
+4. The script analyzes the image row by row, grouping similar colors
+5. Output: 8-12 distinct colors with exact row counts
 
 ---
 
-## Struttura cartelle
+## Project Structure
 
 ```
 Palette/
-├── Movies/     # 257 palette originali (PNG)
-├── Pattern/    # 100 pattern pronti (MD)
-├── Script/     # genera_pattern.py
+├── Movies/          # 257 original palette images (PNG)
+├── Pattern/         # 257 pattern files (Markdown)
+├── Script/          # Python scripts for pattern generation
+├── Web/             # Web interface
+│   ├── index.html   # Main app
+│   ├── films_data.js # All film data
+│   └── yarn-ball.png # Yarn ball texture
 └── README.md
 ```
 
 ---
 
-## Fonte
+## Films Available
 
-Le palette originali vengono da [The Colors of Motion](https://www.thecolorsofmotion.com/), un progetto che analizza i colori di ogni fotogramma dei film.
+### Classics
+12 Angry Men, 2001: A Space Odyssey, A Clockwork Orange, Apocalypse Now, Barry Lyndon, Blade Runner, Gone with the Wind, Manhattan, Taxi Driver, The Godfather, The Shining, The Wizard of Oz
+
+### 80s-90s
+Aliens, Back to the Future, Braveheart, Dirty Dancing, Fargo, Fight Club, Goodfellas, Grease, Heat, Jurassic Park, Pulp Fiction, Se7en, The Big Lebowski, The Matrix, The Shawshank Redemption, Titanic, Toy Story
+
+### 2000s
+Amélie, Avatar, Donnie Darko, Eternal Sunshine of the Spotless Mind, Finding Nemo, Gladiator, Her, Inception, Kill Bill, La La Land, Lost in Translation, Moonrise Kingdom, No Country for Old Men, Spirited Away, The Dark Knight, The Grand Budapest Hotel, The Lord of the Rings, There Will Be Blood, Wall-E
+
+### Animation
+Aladdin, Beauty and the Beast, Frozen, How to Train Your Dragon, Moana, Monsters Inc., Mulan, My Neighbor Totoro, Snow White, The Incredibles, The Lion King, The Little Mermaid, Up
+
+### And 200+ more...
 
 ---
 
-*Gennaio 2026*
+## Generate New Patterns
+
+```bash
+cd Script
+source /path/to/venv/bin/activate
+
+# Generate pattern from a palette image
+python genera_pattern_v2.py ../Movies/film-name.png
+
+# All patterns regenerated
+for f in ../Movies/*.png; do python genera_pattern_v2.py "$f"; done
+```
+
+---
+
+## Yarn Estimates
+
+The app estimates yarn needed based on:
+
+| Technique | Yarn per stitch |
+|-----------|-----------------|
+| Knitting  | ~1.3 cm |
+| Crochet   | ~2.0 cm |
+
+Standard ball: 50g = ~125 meters
+
+---
+
+## Credits
+
+- Film palettes from [The Colors of Motion](https://thecolorsofmotion.com/)
+- Built with Claude Code
+
+---
+
+*January 2025*
