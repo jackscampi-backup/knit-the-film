@@ -17,7 +17,7 @@ The result? Scarves, blankets, cushions, and other textile creations that visual
 ## Features
 
 - **257 film palettes** from [The Colors of Motion](https://thecolorsofmotion.com/)
-- **Web interface** with product selector (Scarf, Blanket, Mousepad, Cushion, Custom)
+- **Mobile-first web interface** with product selector (Scarf, Blanket, Mousepad, Cushion, Custom)
 - **Automatic calculations** for rows, stitches, and yarn needed
 - **Yarn ball estimates** (different for knitting vs crochet)
 - **Pattern instructions** with segment-by-segment guidance
@@ -104,4 +104,4 @@ Standard ball: 50g = ~125 meters
 
 ---
 
-*January 2025*
+*January 2026*
