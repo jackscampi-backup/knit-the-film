@@ -7,3 +7,7 @@ __pycache__/
 
 # Build artifacts
 *.log
+
+# Secrets
+.env
+.env.*
